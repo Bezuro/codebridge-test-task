@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import { ArticleType } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
+import useFetch from './hooks/useFetch';
 
 function Home() {
   const [articles, setArticles] = useState<ArticleType[]>([]);
@@ -18,6 +19,8 @@ function Home() {
 
   const navigate = useNavigate();
 
+  const [data] = useFetch('https://api.spaceflightnewsapi.net/v3/articles');
+
   const limitSentence = (str = '', limit = 0, separator = ' ') => {
     if (str.length < limit) return str;
 
@@ -26,7 +29,7 @@ function Home() {
 
   const changeFilterHandler = (filterText: string) => {
     if (filterText.length <= 0) {
-      setFilteredArticles(articles);
+      setFilteredArticles(data);
       return;
     }
 
@@ -37,10 +40,10 @@ function Home() {
     let resultsNames: ArticleType[] = [];
     let resultsDescriptions: ArticleType[] = [];
 
-    articles.forEach(function (article, index) {
+    data.forEach((article: ArticleType, index: number) => {
       var nameMatches = 0;
       var descMatches = 0;
-      keywordsArr.forEach(function (keyword) {
+      keywordsArr.forEach((keyword) => {
         if (article.title.toLowerCase().includes(keyword.toLowerCase())) {
           nameMatches++;
         }
@@ -60,23 +63,15 @@ function Home() {
 
     const results = [...resultsNames, ...resultsDescriptions];
 
-    console.log('results :>> ', results);
-
     setFilteredArticles(results);
   };
 
-  const fetchArticleData = () => {
-    axios.get('https://api.spaceflightnewsapi.net/v3/articles').then((res) => {
-      console.log('res.data :>> ', res.data);
-      setArticles(res.data);
-      setFilteredArticles(res.data);
-      setIsLoaded(true);
-    });
-  };
-
   useEffect(() => {
-    fetchArticleData();
-  }, []);
+    setFilteredArticles(data);
+    if (data && data.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [data]);
 
   return (
     <Box sx={{ paddingTop: 4, px: 2 }}>
@@ -85,13 +80,14 @@ function Home() {
       </Box>
 
       <Box sx={{ marginTop: '40px' }}>
-        <Results length={filteredArticles.length} />
+        <Results length={filteredArticles?.length} />
       </Box>
 
       <Box sx={{ marginTop: '45px' }}>
         <Grid container spacing={4}>
           {isLoaded &&
-            filteredArticles.map((article) => {
+            data &&
+            filteredArticles?.map((article) => {
               return (
                 <Grid
                   key={article.id}
