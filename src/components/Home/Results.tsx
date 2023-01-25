@@ -4,6 +4,7 @@ import Divider from '@mui/material/Divider';
 
 type ResultsProps = {
   length: number;
+  lastArticleId: number;
 };
 
 function Results(props: ResultsProps) {
@@ -15,6 +16,15 @@ function Results(props: ResultsProps) {
         sx={{ marginBottom: '5px' }}
       >
         Results: {props.length}
+      </Typography>
+      <Typography
+        variant="subtitle2"
+        color="primary"
+        sx={{ marginBottom: '5px' }}
+      >
+        {props.lastArticleId && props.lastArticleId > 0
+          ? `lastArticleId: ${props.lastArticleId}`
+          : null}
       </Typography>
       <Divider />
     </div>

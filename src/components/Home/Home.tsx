@@ -11,7 +11,11 @@ import { ArticleType } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
 import useFetch from './hooks/useFetch';
 
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+
 function Home() {
+  const lastArticleId = useAppSelector((state) => state.lastArticleId.value);
+
   const [articles, setArticles] = useState<ArticleType[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [filteredArticles, setFilteredArticles] = useState<ArticleType[]>([]);
@@ -80,7 +84,10 @@ function Home() {
       </Box>
 
       <Box sx={{ marginTop: '40px' }}>
-        <Results length={filteredArticles?.length} />
+        <Results
+          length={filteredArticles?.length}
+          lastArticleId={lastArticleId}
+        />
       </Box>
 
       <Box sx={{ marginTop: '45px' }}>

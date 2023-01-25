@@ -7,10 +7,14 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { setLastArticleId } from '../../store/lastArticleIdSlice';
 
 function Article() {
   const [article, setArticle] = useState<ArticleType>();
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -23,6 +27,8 @@ function Article() {
         console.log('res.data :>> ', res.data);
         setArticle(res.data);
         setIsLoaded(true);
+
+        dispatch(setLastArticleId(res.data.id));
       });
   };
 
