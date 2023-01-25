@@ -37,7 +37,7 @@ function Home() {
       return;
     }
 
-    const keywordsArr = filterText.trim().split(' ');
+    const keywordsArr = filterText.replace(/\s+/g, ' ').trim().split(' ');
 
     setKeywordsState(keywordsArr);
 
