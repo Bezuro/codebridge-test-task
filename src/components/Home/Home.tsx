@@ -1,12 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import Filter from './Filter';
 import Results from './Results';
 import Card from './Card';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import { ArticleType } from '../../types/types';
 import { useNavigate } from 'react-router-dom';
 import useFetch from './hooks/useFetch';
@@ -16,7 +14,6 @@ import { useAppSelector, useAppDispatch } from '../../store/hooks';
 function Home() {
   const lastArticleId = useAppSelector((state) => state.lastArticleId.value);
 
-  const [articles, setArticles] = useState<ArticleType[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [filteredArticles, setFilteredArticles] = useState<ArticleType[]>([]);
   const [keywordsState, setKeywordsState] = useState<string[]>([]);
