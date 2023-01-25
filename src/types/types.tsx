@@ -1,4 +1,4 @@
-type Article = {
+type ArticleType = {
   id: number;
   imageUrl: string;
   title: string;
@@ -6,4 +6,4 @@ type Article = {
   publishedAt: string;
 };
 
-export type { Article };
+export type { ArticleType };

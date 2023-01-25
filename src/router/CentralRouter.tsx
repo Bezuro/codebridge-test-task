@@ -7,11 +7,11 @@ import Article from '../components/Article/Article';
 
 function CentralRouter() {
   return (
-    <Container sx={{ paddingTop: 4, px: 2 }}>
+    <Container>
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route element={<Article />} />
+          <Route path="/article/:id" element={<Article />} />
         </Route>
       </Routes>
     </Container>

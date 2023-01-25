@@ -21,7 +21,14 @@ function Card(props: ArticleProp) {
   const dateOutput = `${month} ${day}, ${year}`;
 
   return (
-    <MuiCard sx={{ maxWidth: 400 }}>
+    <MuiCard
+      sx={{
+        maxWidth: 400,
+        border: '1px solid #EAEAEA',
+        boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.05)',
+        borderRadius: '5px',
+      }}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -29,7 +36,7 @@ function Card(props: ArticleProp) {
           image={props.imageUrl}
           alt={props.imageUrl}
         />
-        <CardContent sx={{ p: 2.5 }}>
+        <CardContent sx={{ p: 2.5, height: '313px' }}>
           <Typography
             variant="caption"
             style={{
@@ -45,7 +52,7 @@ function Card(props: ArticleProp) {
             </Typography>
           </Typography>
 
-          <Typography variant="h3" component="div" mt={3}>
+          <Typography variant="h3" mt={3}>
             {props.title}
           </Typography>
 
