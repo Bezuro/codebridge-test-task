@@ -3,12 +3,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Card as MuiCard } from '@mui/material';
+import Highlighter from 'react-highlight-words';
 
 type ArticleProp = {
   imageUrl: string;
   title: string;
   summary: string;
   publishedAt: string;
+  keywords: string[];
 };
 
 function Card(props: ArticleProp) {
@@ -53,11 +55,21 @@ function Card(props: ArticleProp) {
           </Typography>
 
           <Typography variant="h3" mt={3}>
-            {props.title}
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={props.keywords}
+              autoEscape={true}
+              textToHighlight={props.title}
+            />
           </Typography>
 
           <Typography variant="body1" mt={2.5}>
-            {props.summary}
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={props.keywords}
+              autoEscape={true}
+              textToHighlight={props.summary}
+            />
           </Typography>
 
           <Typography

@@ -14,6 +14,7 @@ function Home() {
   const [articles, setArticles] = useState<ArticleType[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [filteredArticles, setFilteredArticles] = useState<ArticleType[]>([]);
+  const [keywordsState, setKeywordsState] = useState<string[]>([]);
 
   const navigate = useNavigate();
 
@@ -30,6 +31,9 @@ function Home() {
     }
 
     const keywordsArr = filterText.trim().split(' ');
+
+    setKeywordsState(keywordsArr);
+
     let resultsNames: ArticleType[] = [];
     let resultsDescriptions: ArticleType[] = [];
 
@@ -106,6 +110,7 @@ function Home() {
                       summary={limitSentence(article.summary, 100)}
                       imageUrl={article.imageUrl}
                       publishedAt={article.publishedAt}
+                      keywords={keywordsState}
                     />
                   </Box>
                 </Grid>
