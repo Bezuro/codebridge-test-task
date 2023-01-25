@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ArticleType } from '../../types/types';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
